@@ -1,49 +1,35 @@
 #include<stdio.h>
-#include<conio.h>
+#include<string.h>
 
 int main()
 {
-    char com[200];
-    char line_num[50];
-    int i, j=0, k,check=0,count=0,line=1;
-    printf("Enter a multi line Comment( press ';' to end input): \n");
-    scanf("%[^;]s", com);
-    for(i=0;i<strlen(com);i++){
-        if(com[i]== '/' && com[i+1]=='/')
+    char str[100];
+    int check =0, check_a =0;
+    printf("Enter a String: ");
+    gets(str);
+        for(int i=0;i<strlen(str);i++)
         {
-            check=1;
-            line_num[j]= line;
-            j++;
-            i=i+1;
-        }
-        else if(com[i]== '/' && com[i+1]=='*')
-        {
-            for(k=i+2;k<strlen(com);k++){
-                if(com[k]== '*' && com[k+1]=='/'){
-                    line_num[j]= line;
-                    j++;
-                    check=1;
-                    i=k+1;
-                }
-            }
-        }
-        if(com[i]=='\n')
+            if(str[i] == 'a')
             {
-                line++;
+                check_a =1;
+                continue;
             }
-    }
-    if(check==0)
-    {
-        printf("There is no comment.\n");
-    }
-    else{
-        for(int l=0;l<strlen(line_num);l++)
-        {
-            printf("Comments are written in line no. %ch\n",line_num[l]);
-            count++;
+            else if( check_a ==1 && str[i] == 'b')
+            {
+                continue;
+            }
+            else if( check_a ==1 && str[i] == 'c')
+            {
+                check=1;
+                printf("accepted through a+b*c+\n");
+                break;
+            }
+            else{
+                check=0;
+            }
         }
-        printf("The total number of line where the comments are written is, %d \n",count);
+    if(check ==0){
+        printf(" not accepted through a+b*c+\n");
     }
     return 0;
 }
-
